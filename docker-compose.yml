@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  backend:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    network_mode: bridge
+    restart: always
+    healthcheck:
+      test: curl -f http://localhost:8080/healthcheck
+    ports:
+      - 8080:8080
+      - 9090:9090
+    env_file:
+      config/.env
